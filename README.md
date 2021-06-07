@@ -2,7 +2,7 @@ Custom URL Shortner
 
 * [Express](https://expressjs.com/)
 * [Mongoose](http://mongoosejs.com/)
-* [ShortId](https://github.com/dylang/shortid)
+* [React](https://reactjs.org/)
 
 ## Getting Started
 
