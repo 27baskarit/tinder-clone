@@ -1,27 +1,20 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import "./TinderCards.css"
 import TinderCard from 'react-tinder-card'
 import { SwipeableDrawer } from '@material-ui/core'
-
+import axios from './axios'
 function TinderCards() {
-    const [people,setPeople] = useState([
-        {
-            "name":"Rajini",
-            "url":"https://bsmedia.business-standard.com/_media/bs/img/article/2020-01/07/full/1578418256-2796.jpg"
-        },
-        {
-            "name":"Kamal",
-            "url":"https://akm-img-a-in.tosshub.com/indiatoday/images/story/202008/Kamal_Haasan_latest_pic.jpeg?S1fWLdVHAO020wkktYjUE0jA5IjqPLPk&size=1200:675"
-        },
-        {
-            "name":"Vijay",
-            "url":"https://akm-img-a-in.tosshub.com/indiatoday/images/story/202101/BeFunky-collage__5__3_1200x768.jpeg?kX3fGufhZMPSymV951nrTULvXbB4iGhc&size=1200:675"
-        },
-        {
-            "name":"Ajith",
-            "url":"https://filmfare.wwmindia.com/content/2021/apr/thalaajith11617710652.jpg"
-        },                        
-    ])
+    
+    const [people,setPeople] = useState([])
+
+    useEffect(() => {
+        async function fetchdata(){
+            console.log(axios)
+            const req = await axios.get("/tinder/card")
+            setPeople(req.data)
+        }
+        fetchdata()
+    }, [])
 
     const swiped = (direction, nameToDelete) => {
         console.log("Name To Delete "+ nameToDelete)
@@ -44,7 +37,7 @@ function TinderCards() {
                         onCardLeftScreen={() => outOfFrame(person.name)} 
                         preventSwipe={['up', 'down']}
                     >
-                        <div className="card" style={{ backgroundImage:`url(${person.url})` }}>
+                        <div className="card" style={{ backgroundImage:`url(${person.imgUrl})` }}>
                              <h3>{person.name}</h3>
                         </div>
                         
